@@ -79,20 +79,4 @@
       }
     }
   }
-  button {
-    padding: 15px;
-    background-color: rgba(230, 74, 105, 0.533);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-
-    &:hover {
-      background-color: rgba(230, 74, 105, 0.8);
-    }
-    &.logout {
-      padding: 10px;
-      background-color: #1a73e8;
-    }
-  }
 }

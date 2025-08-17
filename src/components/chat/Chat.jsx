@@ -11,6 +11,7 @@ import { db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
 import uploadImage from "../../lib/upload";
+import EmojiPicker from "emoji-picker-react";
 const Chat = () => {
   const { chatId, user, isReceiverBlocked, isCurrentUserBlocked } =
     useChatStore();
@@ -23,7 +24,6 @@ const Chat = () => {
   });
   const [messages, setMessages] = useState([]);
   const endRef = useRef(null);
-
   const handleEmojiClick = (emoji) => {
     setText((prev) => prev + emoji.emoji);
     setOpen(false);
@@ -101,10 +101,12 @@ const Chat = () => {
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src="/avatar.png" alt="" />
+          <img src={user?.avatar || "/avatar.png"} alt="" />
           <div className="texts">
-            <span>User Name</span>
-            <p>Last message...</p>
+            <span>{user?.userName}</span>
+            <p>
+              <span style={{ color: "green" }}>●</span> {"online"}
+            </p>
           </div>
         </div>
         <div className="icons">
@@ -173,7 +175,7 @@ const Chat = () => {
           <img src="/emoji.png" alt="" onClick={() => setOpen(!open)} />
           <div className="picker">
             {open && (
-              <EmojiPicer
+              <EmojiPicker
                 open={open}
                 onEmojiClick={(emoji) => {
                   handleEmojiClick(emoji);
